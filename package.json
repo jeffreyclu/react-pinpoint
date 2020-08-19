@@ -38,9 +38,11 @@
     "jest": "26.1.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "yargs": "^15.4.1"
   },
   "dependencies": {
+    "prompt": "^1.0.0",
     "unique-random-array": "2.0.0"
   }
 }
