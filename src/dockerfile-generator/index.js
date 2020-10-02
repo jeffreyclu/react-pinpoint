@@ -23,7 +23,7 @@ COPY . .`;
 /**
  * @description function to sanitize string
  */
-const sanitizeString = (str) => {
+const sanitizeString = str => {
   const sanitizedStr = str.replace(/[^a-z0-9.,_-]/gim, '');
   return sanitizedStr.trim();
 };
@@ -34,8 +34,8 @@ let dockerComposeFile = '';
 /**
  * @description function to generate a docker-compose.yml file based on input parameters
  */
-const generateDockerComposeFile = (parameters) => {
-  const { appName, port, startScript, testScript } = parameters;
+const generateDockerComposeFile = parameters => {
+  const {appName, port, startScript, testScript} = parameters;
   if (typeof appName !== 'string' || typeof startScript !== 'string' || typeof testScript !== 'string') {
     throw new Error('Error, input must be a string.');
   }
@@ -63,17 +63,17 @@ const generateDockerComposeFile = (parameters) => {
  */
 const writeFiles = () => {
   const files = [
-    { fileName: 'Dockerfile.app', contents: appDockerFile },
-    { fileName: 'Dockerfile.test', contents: testDockerFile },
-    { fileName: 'docker-compose.yml', contents: dockerComposeFile },
+    {fileName: 'Dockerfile.app', contents: appDockerFile},
+    {fileName: 'Dockerfile.test', contents: testDockerFile},
+    {fileName: 'docker-compose.yml', contents: dockerComposeFile},
   ];
-  files.forEach((file) => fs.writeFileSync(path.resolve(__dirname, file.fileName), file.contents));
+  files.forEach(file => fs.writeFileSync(path.resolve(__dirname, file.fileName), file.contents));
 };
 
 /**
  * @description function to log an error
  */
-const onErr = (err) => {
+const onErr = err => {
   console.log(err);
   return 1;
 };
@@ -114,6 +114,6 @@ prompt.get(schema, (err, result) => {
   }
   result.appName = sanitizeString(result.appName);
   generateDockerComposeFile(result);
-  console.log(`success. remember to change http://localhost in your puppeteer test file to http://${result.appName}`)
+  console.log(`success. remember to change http://localhost in your puppeteer test file to http://${result.appName}`);
   return writeFiles(result);
 });
